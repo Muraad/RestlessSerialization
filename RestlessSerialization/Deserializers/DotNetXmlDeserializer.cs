@@ -17,6 +17,8 @@
 using System.IO;
 using System.Text;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Restless.Deserializers
 {
@@ -44,17 +46,5 @@ namespace Restless.Deserializers
                 return (T)serializer.Deserialize(stream);
             }
         }
-
-		public T Deserialize<T>(HttpWebResponse response)
-		{
-            string content = "";
-
-            using (Stream stream = response.GetResponseStream())
-            {
-                StreamReader reader = new StreamReader(stream);
-                content = reader.ReadToEnd();
-            }
-			return Deserialize<T>(content);
-		}
 	}
 }

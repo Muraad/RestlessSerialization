@@ -16,11 +16,13 @@
 
 using System;
 using System.Net;
+using System.Net.Http;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
+using System.Threading.Tasks;
 
 using Restless;
 using Restless.Extensions;
@@ -74,19 +76,6 @@ namespace Restless.Deserializers
 
             return x;
         }
-
-		public virtual T Deserialize<T>(HttpWebResponse response)
-		{
-            string content = "";
-
-            using (System.IO.Stream stream = response.GetResponseStream())
-            {
-                System.IO.StreamReader reader = new System.IO.StreamReader(stream);
-                content = reader.ReadToEnd();
-            }
-
-            return Deserialize<T>(content);
-		}
 
 		private void RemoveNamespace(XDocument xdoc)
 		{

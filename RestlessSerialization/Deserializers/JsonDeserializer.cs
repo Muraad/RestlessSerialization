@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
+using System.IO;
+using System.Threading.Tasks;
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -54,21 +58,6 @@ namespace Restless.Deserializers
 
             return target;
         }
-
-		public T Deserialize<T>(HttpWebResponse response)
-		{
-			var target = Activator.CreateInstance<T>();
-
-            string content = "";
-            
-            using(System.IO.Stream stream = response.GetResponseStream())
-            {
-                   System.IO.StreamReader reader = new System.IO.StreamReader( stream );
-                   content = reader.ReadToEnd();    
-            }
-
-            return Deserialize<T>(content);
-		}
 
 		private object FindRoot(string content)
 		{

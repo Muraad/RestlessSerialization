@@ -15,13 +15,14 @@
 #endregion
 
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Restless.Deserializers
 {
 	public interface IDeserializer
 	{
         T Deserialize<T>(string content);
-		T Deserialize<T>(HttpWebResponse response);
 		string RootElement { get; set; }
 		string Namespace { get; set; }
 		string DateFormat { get; set; }
